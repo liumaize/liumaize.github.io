@@ -63,6 +63,11 @@
 
 
 
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,6 +79,7 @@
             position: relative;
             max-width: 1000px;
             margin: auto;
+            cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
         }
 
         .mySlides {
@@ -92,7 +98,7 @@
     </style>
 </head>
 <body>
-    <div class="slideshow-container">
+    <div class="slideshow-container" onclick="stopSlideshow()">
         <div class="mySlides fade">
             <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg" style="width:100%">
         </div>
@@ -103,8 +109,20 @@
 
     <script>
         let slideIndex = 0;
-        showSlides();
+        let slideshowInterval;
 
+        // Function to start the slideshow
+        function startSlideshow() {
+            showSlides();
+            slideshowInterval = setInterval(showSlides, 2000); // Change image every 2 seconds
+        }
+
+        // Function to stop the slideshow
+        function stopSlideshow() {
+            clearInterval(slideshowInterval); // Clear the interval to stop the slideshow
+        }
+
+        // Function to show slides
         function showSlides() {
             let slides = document.getElementsByClassName("mySlides");
             for (let i = 0; i < slides.length; i++) {
@@ -113,8 +131,10 @@
             slideIndex++;
             if (slideIndex > slides.length) {slideIndex = 1}    
             slides[slideIndex-1].style.display = "block";  
-            setTimeout(showSlides, 2000); // Change image every 2 seconds
         }
+
+        // Start the slideshow when the page loads
+        window.onload = startSlideshow;
     </script>
 </body>
 </html>
