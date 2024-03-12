@@ -156,9 +156,6 @@
 
 
 
-        
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -218,11 +215,11 @@
     <div class="slideshow-container">
         <div class="mySlides">
             <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg">
-            <div class="slide-text">202312</div> <!-- Text for picture 1 -->
+            <div class="slide-text">12</div> <!-- Text for picture 1 -->
         </div>
         <div class="mySlides">
             <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg">
-            <div class="slide-text">202401</div> <!-- Text for picture 2 -->
+            <div class="slide-text">01</div> <!-- Text for picture 2 -->
         </div>
         <div class="progress-bar"></div>
         <div class="control-icon" onclick="toggleSlideshow()">
@@ -281,7 +278,7 @@
                 controlIcon.className = 'fa fa-pause';
                 isPaused = false;
                 showSlides();
-                updateProgressBar((slides.length - slideIndex) * 1000); // Resume progress bar
+                updateProgressBar(2000 * (slides.length - slideIndex)); // Resume progress bar
             } else {
                 controlIcon.className = 'fa fa-play';
                 isPaused = true;
