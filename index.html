@@ -149,7 +149,8 @@
 
  
 
-      
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -270,6 +271,10 @@
             clearTimeout(interval); // Clear the interval
             clearInterval(progressInterval); // Stop the progress bar interval
             progress.style.width = '0%'; // Reset progress bar
+            slideIndex = 0; // Reset slide index
+            slides.forEach(function(slide) { // Hide all slides
+                slide.style.display = 'none';
+            });
         }
 
         showSlides();
