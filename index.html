@@ -160,8 +160,12 @@
 
 
 
+
             
        
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -247,8 +251,6 @@
             slideIndex++;
             if (slideIndex >= slides.length) {
                 slideIndex = 0; // Reset to the first slide
-                updateProgress(); // Update progress to 100% after showing the second slide
-                return; // Exit the function after the second slide
             }    
             slides[slideIndex].style.display = "block";  // Show next slide
 
@@ -259,7 +261,7 @@
         // Function to update progress bar
         function updateProgress() {
             let progressBar = document.querySelector(".progress-bar");
-            progressWidth = 0; // Reset progress width
+            progressWidth = (slideIndex + 1) * 50; // Update progress to 50% or 100%
             progressBar.style.width = progressWidth + "%";
         }
 
@@ -268,5 +270,4 @@
     </script>
 </body>
 </html>
-            
 
