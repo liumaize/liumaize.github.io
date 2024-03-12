@@ -151,7 +151,10 @@
 
 
 
+        
             
+
+
 
 
 
@@ -241,15 +244,12 @@
         // Function to show slides
         function showSlides() {
             let slides = document.getElementsByClassName("mySlides");
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
-            }
+            slides[slideIndex].style.display = "none";  // Hide current slide
             slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
-                pauseSlideshow(); // Pause slideshow after one complete cycle
+            if (slideIndex >= slides.length) {
+                slideIndex = 0; // Reset to the first slide when reaching the end
             }    
-            slides[slideIndex-1].style.display = "block";  
+            slides[slideIndex].style.display = "block";  // Show next slide
 
             // Update progress bar
             updateProgress();
@@ -272,4 +272,6 @@
     </script>
 </body>
 </html>
+
+      
 
