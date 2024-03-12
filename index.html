@@ -164,7 +164,9 @@
 
 
         
-             
+
+            
+       
 
 
 
@@ -222,7 +224,6 @@
 
     <script>
         let slideIndex = 0;
-        let slideshowInterval;
         let progressWidth = 0;
         let duration = 2000; // Duration of each slide in milliseconds (adjust as needed)
         let isPaused = false;
@@ -240,13 +241,11 @@
         function startSlideshow() {
             isPaused = false;
             showSlides();
-            slideshowInterval = setInterval(showSlides, duration); // Change image every 'duration' milliseconds
         }
 
         // Function to pause the slideshow
         function pauseSlideshow() {
             isPaused = true;
-            clearInterval(slideshowInterval); // Clear the interval to pause the slideshow
         }
 
         // Function to show slides
@@ -256,7 +255,8 @@
             slideIndex++;
             if (slideIndex >= slides.length) {
                 slideIndex = slides.length - 1; // Keep index at last slide
-                pauseSlideshow(); // Pause slideshow after the second slide
+                updateProgress(); // Update progress to 100% after the second slide
+                return; // Exit the function after the second slide
             }    
             slides[slideIndex].style.display = "block";  // Show next slide
 
@@ -264,13 +264,8 @@
             updateProgress();
         }
 
-        // Function to update progress bar
-        function updateProgress() {
-            let progressBar = document.querySelector(".progress-bar");
-            progressWidth += (100 / duration) * 100; // Increment progress by 100 milliseconds (adjust as needed)
-            progressBar.style.width = progressWidth + "%";
+       
 
-          
 
             
 
