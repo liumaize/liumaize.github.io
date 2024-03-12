@@ -153,20 +153,11 @@
 
         
             
-
-
-
-
-
-
-
-
-
-
-        
-
             
+  
        
+
+
 
 
 
@@ -212,7 +203,7 @@
 <body>
     <div class="slideshow-container" onclick="toggleSlideshow()">
         <div class="mySlides">
-            <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg" style="width:70%; height:70%;">
+            <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg" style="width:70%; height:70%;">
         </div>
         <div class="mySlides">
             <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg" style="width:70%; height:70%;">
@@ -264,8 +255,18 @@
             updateProgress();
         }
 
-       
+        // Function to update progress bar
+        function updateProgress() {
+            let progressBar = document.querySelector(".progress-bar");
+            progressWidth = 100; // Set progress to 100%
+            progressBar.style.width = progressWidth + "%";
+        }
 
+        // Start the slideshow when the page loads
+        window.onload = startSlideshow;
+    </script>
+</body>
+</html>
 
             
 
