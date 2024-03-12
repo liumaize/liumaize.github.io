@@ -213,6 +213,68 @@
         var slideIndex = 0;
         var progress = document.querySelector('.progress-bar');
         var controlIcon = document.getElementById('controlIcon');
-        var isPaus
+        var isPaused = false;
+        var interval;
+        var progressInterval;
+
+        // Hide all slides initially except the first one
+        slides.forEach(function(slide, index) {
+            if (index !== 0) {
+                slide.style.display = 'none';
+            }
+        });
+
+        function showSlides() {
+            if (slideIndex < slides.length) {
+                slides[slideIndex].style.display = 'block';
+                slideIndex++;
+                interval = setTimeout(hideSlides, 2000); // Display each slide for 2 seconds
+                updateProgressBar(2000); // Update progress bar for each slide (2 seconds)
+            }
+        }
+
+        function hideSlides() {
+            slides[slideIndex - 1].style.display = 'none';
+            showSlides();
+        }
+
+        function updateProgressBar(duration) {
+            var width = 0;
+            var increment = 10;
+            var intervalDuration = duration / increment;
+            progressInterval = setInterval(function() {
+                width += 100 / increment;
+                progress.style.width = width + '%';
+                if (width >= 100) {
+                    clearInterval(progressInterval);
+                }
+            }, intervalDuration);
+        }
+
+        function toggleSlideshow() {
+            if (isPaused) {
+                controlIcon.className = 'fa fa-pause';
+                isPaused = false;
+                showSlides();
+            } else {
+                controlIcon.className = 'fa fa-play';
+                isPaused = true;
+                clearTimeout(interval);
+                clearInterval(progressInterval); // Stop the progress bar interval
+            }
+        }
+
+        function stopSlideshow() {
+            controlIcon.className = 'fa fa-play'; // Change control icon to play icon
+            isPaused = true; // Set slideshow status to paused
+            clearTimeout(interval); // Clear the interval
+            clearInterval(progressInterval); // Stop the progress bar interval
+            progress.style.width = '0%'; // Reset progress bar
+        }
+
+        showSlides();
+    </script>
+</body>
+</html>
 
 
