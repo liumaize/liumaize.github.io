@@ -163,11 +163,8 @@
 
 
 
-            
-
-
-
-
+        
+             
 
 
 
@@ -213,10 +210,10 @@
 <body>
     <div class="slideshow-container" onclick="toggleSlideshow()">
         <div class="mySlides">
-            <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg" style="width:70%; height:70%;"> 
+            <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg" style="width:70%; height:70%;">
         </div>
         <div class="mySlides">
-            <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg" style="width:70%; height:70%;"> 
+            <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg" style="width:70%; height:70%;">
         </div>
         <div class="progress-container">
             <div class="progress-bar"></div>
@@ -258,7 +255,8 @@
             slides[slideIndex].style.display = "none";  // Hide current slide
             slideIndex++;
             if (slideIndex >= slides.length) {
-                slideIndex = 0; // Reset to the first slide when reaching the end
+                slideIndex = slides.length - 1; // Keep index at last slide
+                pauseSlideshow(); // Pause slideshow after the second slide
             }    
             slides[slideIndex].style.display = "block";  // Show next slide
 
@@ -272,17 +270,7 @@
             progressWidth += (100 / duration) * 100; // Increment progress by 100 milliseconds (adjust as needed)
             progressBar.style.width = progressWidth + "%";
 
-            // Reset progress when reaching the end of the slideshow
-            if (progressWidth >= 100) {
-                progressWidth = 0;
-            }
-        }
+          
 
-        // Start the slideshow when the page loads
-        window.onload = startSlideshow;
-    </script>
-</body>
-</html>
-
-      
+            
 
