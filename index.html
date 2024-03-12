@@ -154,108 +154,24 @@
 
 
             
-        
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slideshow</title>
-    <style>
-        .slideshow-container {
-            position: relative;
-            max-width: 800px; /* Adjust the maximum width of the slideshow */
-            margin: auto;
-            cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
-        }
-
-        .mySlides {
-            display: none;
-            width: 100%;
-        }
-
-        /* Progress bar styles */
-        .progress-container {
-            width: 100%;
-            background-color: #f3f3f3;
-            position: relative;
-            height: 10px;
-            cursor: pointer;
-        }
-
-        .progress-bar {
-            width: 0%;
-            height: 100%;
-            background-color: #4caf50;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: width 0.2s ease; /* Smooth transition for progress bar */
-        }
-    </style>
 </head>
 <body>
-    <div class="slideshow-container" onclick="toggleSlideshow()">
+    <div class="slideshow-container">
         <div class="mySlides">
             <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg" style="width:70%; height:70%;">
         </div>
         <div class="mySlides">
             <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg" style="width:70%; height:70%;">
         </div>
-        <div class="progress-container">
-            <div class="progress-bar"></div>
-        </div>
     </div>
-
-    <script>
-        let slideIndex = 0;
-        let progressWidth = 0;
-        let duration = 2000; // Duration of each slide in milliseconds (adjust as needed)
-        let isPaused = false;
-
-        // Function to start or pause the slideshow
-        function toggleSlideshow() {
-            if (isPaused) {
-                startSlideshow();
-            } else {
-                pauseSlideshow();
-            }
-        }
-
-        // Function to start the slideshow
-        function startSlideshow() {
-            isPaused = false;
-            showSlides();
-        }
-
-        // Function to pause the slideshow
-        function pauseSlideshow() {
-            isPaused = true;
-        }
-
-        // Function to show slides
-        function showSlides() {
-            let slides = document.getElementsByClassName("mySlides");
-            slides[slideIndex].style.display = "none";  // Hide current slide
-            slideIndex++;
-            if (slideIndex >= slides.length) {
-                slideIndex = 0; // Reset to the first slide
-            }    
-            slides[slideIndex].style.display = "block";  // Show next slide
-
-            // Update progress bar
-            updateProgress();
-        }
-
-        // Function to update progress bar
-        function updateProgress() {
-            let progressBar = document.querySelector(".progress-bar");
-            progressWidth = (slideIndex + 1) * 50; // Update progress to 50% or 100%
-            progressBar.style.width = progressWidth + "%";
-        }
-
-        // Start the slideshow when the page loads
-        window.onload = startSlideshow;
-    </script>
 </body>
 </html>
+
+       
