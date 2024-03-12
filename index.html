@@ -147,7 +147,7 @@
 
             
 
-           
+ 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -213,56 +213,4 @@
         var interval;
 
         // Hide all slides initially except the first one
-        slides.forEach(function(slide, index) {
-            if (index !== 0) {
-                slide.style.display = 'none';
-            }
-        });
-
-        function showSlides() {
-            slides[slideIndex].style.display = 'block';
-            slideIndex++;
-            if (slideIndex < slides.length) {
-                interval = setTimeout(hideSlides, 2000); // Display each slide for 2 seconds
-                updateProgressBar(2000); // Update progress bar for each slide (2 seconds)
-            } else {
-                slideIndex = 0; // Reset slideIndex to 0 to restart slideshow
-                setTimeout(hideSlides, 2000); // Delay before restarting slideshow
-            }
-        }
-
-        function hideSlides() {
-            slides[slideIndex - 1].style.display = 'none';
-            showSlides();
-        }
-
-        function updateProgressBar(duration) {
-            var width = 0;
-            var increment = 10;
-            var interval = duration / increment;
-            var progressInterval = setInterval(function() {
-                width += 100 / increment;
-                progress.style.width = width + '%';
-                if (width >= 100) {
-                    clearInterval(progressInterval);
-                }
-            }, interval);
-        }
-
-        function toggleSlideshow() {
-            if (isPaused) {
-                controlIcon.className = 'fa fa-pause';
-                isPaused = false;
-                showSlides();
-            } else {
-                controlIcon.className = 'fa fa-play';
-                isPaused = true;
-                clearTimeout(interval);
-            }
-        }
-
-        showSlides();
-    </script>
-</body>
-</html>
-
+        slides.forEach(function(slide, index
