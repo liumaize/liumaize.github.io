@@ -52,7 +52,7 @@
     </div>
 </body>
 </html>
--->
+
 
 
 
@@ -138,7 +138,126 @@
     </script>
 </body>
 </html>
+-->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slideshow</title>
+    <style>
+        .slideshow-container {
+            position: relative;
+            max-width: 1000px;
+            margin: auto;
+            cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+        }
+
+        .mySlides {
+            display: none;
+            width: 100%;
+        }
+
+        .fade {
+            animation: fade 1.5s ease-out infinite;
+        }
+
+        @keyframes fade {
+            0%, 100% { opacity: 0; }
+            10%, 90% { opacity: 1; }
+        }
+
+        /* Progress bar styles */
+        .progress-container {
+            width: 100%;
+            background-color: #f3f3f3;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 4px;
+            background-color: #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container" onclick="stopSlideshow()">
+        <div class="mySlides fade">
+            <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg" style="width:100%">
+        </div>
+        <div class="mySlides fade">
+            <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg" style="width:100%">
+        </div>
+        <div class="mySlides fade">
+            <img src="image3.jpg" style="width:100%">
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        let slideshowInterval;
+        let progressInterval;
+        let progressWidth = 0;
+
+        // Function to start the slideshow
+        function startSlideshow() {
+            showSlides();
+            slideshowInterval = setInterval(showSlides, 2000); // Change image every 2 seconds
+            progressInterval = setInterval(updateProgress, 20); // Update progress bar every 20 milliseconds
+        }
+
+        // Function to stop the slideshow
+        function stopSlideshow() {
+            clearInterval(slideshowInterval); // Clear the interval to stop the slideshow
+            clearInterval(progressInterval); // Clear the interval to stop updating progress bar
+        }
+
+        // Function to show slides
+        function showSlides() {
+            let slides = document.getElementsByClassName("mySlides");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+        }
+
+        // Function to update progress bar
+        function updateProgress() {
+            let progressBar = document.querySelector(".progress-bar");
+            if (progressWidth >= 100) {
+                progressWidth = 0;
+            } else {
+                progressWidth += 0.1; // Increment the progress width
+                progressBar.style.width = progressWidth + "%";
+            }
+        }
+
+        // Start the slideshow when the page loads
+        window.onload = startSlideshow;
+    </script>
+</body>
+</html>
 
 
 
