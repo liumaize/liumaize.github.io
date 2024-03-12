@@ -156,6 +156,8 @@
 
 
 
+
+      
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -172,6 +174,7 @@
 
         .mySlides {
             position: relative;
+            display: none;
         }
 
         .mySlides img {
@@ -215,11 +218,11 @@
     <div class="slideshow-container">
         <div class="mySlides">
             <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg">
-            <div class="slide-text">12</div> <!-- Text for picture 1 -->
+            <div class="slide-text">2312</div> <!-- Text for picture 1 -->
         </div>
         <div class="mySlides">
             <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg">
-            <div class="slide-text">01</div> <!-- Text for picture 2 -->
+            <div class="slide-text">2401</div> <!-- Text for picture 2 -->
         </div>
         <div class="progress-bar"></div>
         <div class="control-icon" onclick="toggleSlideshow()">
@@ -239,19 +242,16 @@
         var interval;
         var progressInterval;
 
-        // Hide all slides initially except the first one
-        slides.forEach(function(slide, index) {
-            if (index !== 0) {
-                slide.style.display = 'none';
-            }
-        });
-
         function showSlides() {
+            slides[slideIndex].style.display = 'block';
+            slideIndex++;
             if (slideIndex < slides.length) {
-                slides[slideIndex].style.display = 'block';
-                slideIndex++;
                 interval = setTimeout(hideSlides, 2000); // Display each slide for 2 seconds
                 updateProgressBar(2000); // Update progress bar for each slide (2 seconds)
+            } else {
+                // Reset slide index to restart slideshow
+                slideIndex = 0;
+                setTimeout(hideSlides, 2000); // Delay before restarting slideshow
             }
         }
 
@@ -264,6 +264,7 @@
             var width = 0;
             var increment = 10;
             var intervalDuration = duration / increment;
+            progress.style.width = '0%'; // Reset progress bar
             progressInterval = setInterval(function() {
                 width += 100 / increment;
                 progress.style.width = width + '%';
@@ -278,7 +279,7 @@
                 controlIcon.className = 'fa fa-pause';
                 isPaused = false;
                 showSlides();
-                updateProgressBar(2000 * (slides.length - slideIndex)); // Resume progress bar
+                updateProgressBar((slides.length - slideIndex) * 2000); // Resume progress bar
             } else {
                 controlIcon.className = 'fa fa-play';
                 isPaused = true;
