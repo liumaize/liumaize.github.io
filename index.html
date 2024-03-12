@@ -154,7 +154,6 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -164,7 +163,7 @@
     <style>
         .slideshow-container {
             position: relative;
-            max-width: 1000px;
+            max-width: 800px; /* Adjust the maximum width of the slideshow */
             margin: auto;
             cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
         }
@@ -187,24 +186,30 @@
         .progress-container {
             width: 100%;
             background-color: #f3f3f3;
+            position: relative;
+            height: 10px;
+            cursor: pointer;
         }
 
         .progress-bar {
             width: 0%;
-            height: 4px;
+            height: 100%;
             background-color: #4caf50;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
     </style>
 </head>
 <body>
-    <div class="slideshow-container" onclick="stopSlideshow()">
+    <div class="slideshow-container">
         <div class="mySlides fade">
-            <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg" style="width:70%;height:70%">
+            <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg" style="width:70%; height:70%;"> <!-- Adjust width and height as needed -->
         </div>
         <div class="mySlides fade">
-            <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg" style="width:70%;height:70%">
+            <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg" style="width:70%; height:70%;"> <!-- Adjust width and height as needed -->
         </div>
-        <div class="progress-container">
+        <div class="progress-container" onclick="toggleSlideshow()">
             <div class="progress-bar"></div>
         </div>
     </div>
@@ -212,20 +217,30 @@
     <script>
         let slideIndex = 0;
         let slideshowInterval;
-        let progressInterval;
         let progressWidth = 0;
+        let duration = 2000; // Duration of each slide in milliseconds (adjust as needed)
+        let isPaused = false;
+
+        // Function to start or pause the slideshow
+        function toggleSlideshow() {
+            if (isPaused) {
+                startSlideshow();
+            } else {
+                pauseSlideshow();
+            }
+        }
 
         // Function to start the slideshow
         function startSlideshow() {
+            isPaused = false;
             showSlides();
-            slideshowInterval = setInterval(showSlides, 2000); // Change image every 2 seconds
-            progressInterval = setInterval(updateProgress, 20); // Update progress bar every 20 milliseconds
+            slideshowInterval = setInterval(showSlides, duration); // Change image every 'duration' milliseconds
         }
 
-        // Function to stop the slideshow
-        function stopSlideshow() {
-            clearInterval(slideshowInterval); // Clear the interval to stop the slideshow
-            clearInterval(progressInterval); // Clear the interval to stop updating progress bar
+        // Function to pause the slideshow
+        function pauseSlideshow() {
+            isPaused = true;
+            clearInterval(slideshowInterval); // Clear the interval to pause the slideshow
         }
 
         // Function to show slides
@@ -237,16 +252,21 @@
             slideIndex++;
             if (slideIndex > slides.length) {slideIndex = 1}    
             slides[slideIndex-1].style.display = "block";  
+
+            // Update progress bar
+            updateProgress();
         }
 
         // Function to update progress bar
         function updateProgress() {
             let progressBar = document.querySelector(".progress-bar");
+            progressWidth += (100 / duration) * 100; // Increment progress by 100 milliseconds (adjust as needed)
+            progressBar.style.width = progressWidth + "%";
+
+            // Reset progress and slide index when reaching the end of the slideshow
             if (progressWidth >= 100) {
                 progressWidth = 0;
-            } else {
-                progressWidth += 0.1; // Increment the progress width
-                progressBar.style.width = progressWidth + "%";
+                slideIndex = 0;
             }
         }
 
@@ -255,6 +275,3 @@
     </script>
 </body>
 </html>
-
-
-
