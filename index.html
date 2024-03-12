@@ -148,6 +148,7 @@
             
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -177,6 +178,16 @@
             width: 0%;
             transition: width 0.1s ease;
         }
+
+        .control-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -188,41 +199,12 @@
             <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg">
         </div>
         <div class="progress-bar"></div>
+        <div class="control-icon" onclick="toggleSlideshow()">
+            <i id="controlIcon" class="fa fa-play"></i>
+        </div>
     </div>
 
     <script>
         var slides = document.querySelectorAll('.mySlides');
-        var slideIndex = 0;
-        var progress = document.querySelector('.progress-bar');
+        
 
-        function showSlides() {
-            slides[slideIndex].style.display = 'block';
-            slideIndex++;
-            if (slideIndex < slides.length) {
-                setTimeout(hideSlides, 2000); // Display each slide for 2 seconds
-                updateProgressBar(2000); // Update progress bar for each slide (2 seconds)
-            }
-        }
-
-        function hideSlides() {
-            slides[slideIndex - 1].style.display = 'none';
-            showSlides();
-        }
-
-        function updateProgressBar(duration) {
-            var width = 0;
-            var increment = 10;
-            var interval = duration / increment;
-            var progressInterval = setInterval(function() {
-                width += 100 / increment;
-                progress.style.width = width + '%';
-                if (width >= 100) {
-                    clearInterval(progressInterval);
-                }
-            }, interval);
-        }
-
-        showSlides();
-    </script>
-</body>
-</html>
