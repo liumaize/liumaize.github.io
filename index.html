@@ -152,6 +152,9 @@
 
            
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -274,6 +277,8 @@
                 controlIcon.className = 'fa fa-pause';
                 isPaused = false;
                 showSlides();
+                // Resume progress bar
+                updateProgressBar((slides.length - slideIndex) * 1000); // Remaining time for the current slide
             } else {
                 controlIcon.className = 'fa fa-play';
                 isPaused = true;
@@ -301,5 +306,3 @@
     </script>
 </body>
 </html>
-
-       
