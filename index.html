@@ -150,6 +150,14 @@
 
 
 
+            <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg" style="width:70%; height:70%;"> <!-- Adjust width and height as needed -->
+
+
+
+
+
+
+
 
 
 
@@ -173,15 +181,6 @@
             width: 100%;
         }
 
-        .fade {
-            animation: fade 1.5s ease-out infinite;
-        }
-
-        @keyframes fade {
-            0%, 100% { opacity: 0; }
-            10%, 90% { opacity: 1; }
-        }
-
         /* Progress bar styles */
         .progress-container {
             width: 100%;
@@ -198,18 +197,19 @@
             position: absolute;
             top: 0;
             left: 0;
+            transition: width 0.2s ease; /* Smooth transition for progress bar */
         }
     </style>
 </head>
 <body>
-    <div class="slideshow-container">
-        <div class="mySlides fade">
+    <div class="slideshow-container" onclick="toggleSlideshow()">
+        <div class="mySlides">
             <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg" style="width:70%; height:70%;"> <!-- Adjust width and height as needed -->
         </div>
-        <div class="mySlides fade">
+        <div class="mySlides">
             <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg" style="width:70%; height:70%;"> <!-- Adjust width and height as needed -->
         </div>
-        <div class="progress-container" onclick="toggleSlideshow()">
+        <div class="progress-container">
             <div class="progress-bar"></div>
         </div>
     </div>
@@ -275,3 +275,4 @@
     </script>
 </body>
 </html>
+
