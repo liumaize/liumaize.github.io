@@ -151,7 +151,6 @@
 
           
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -205,6 +204,9 @@
         <div class="control-icon" onclick="toggleSlideshow()">
             <i id="controlIcon" class="fa fa-pause"></i>
         </div>
+        <div class="control-icon" onclick="stopSlideshow()">
+            <i class="fa fa-stop"></i>
+        </div>
     </div>
 
     <script>
@@ -223,10 +225,8 @@
         });
 
         function showSlides() {
-            if (!isPaused) {
-                slides[slideIndex].style.display = 'block';
-                slideIndex++;
-            }
+            slides[slideIndex].style.display = 'block';
+            slideIndex++;
             if (slideIndex < slides.length) {
                 interval = setTimeout(hideSlides, 2000); // Display each slide for 2 seconds
                 updateProgressBar(2000); // Update progress bar for each slide (2 seconds)
@@ -266,7 +266,19 @@
             }
         }
 
+        function stopSlideshow() {
+            controlIcon.className = 'fa fa-play'; // Change control icon to play icon
+            isPaused = true; // Set slideshow status to paused
+            clearTimeout(interval); // Clear the interval
+            slideIndex = 0; // Reset slide index to 0
+            slides.forEach(function(slide) { // Hide all slides
+                slide.style.display = 'none';
+            });
+            progress.style.width = '0%'; // Reset progress bar
+        }
+
         showSlides();
     </script>
 </body>
 </html>
+
