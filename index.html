@@ -152,93 +152,75 @@
 
            
 
-       
- 
+  
+        <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg" alt="Slide 2">
+
+
+
 
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slideshow</title>
-    <style>
-        .slideshow-container {
-            position: relative;
-            max-width: 800px;
-            margin: auto;
-            overflow: hidden;
-        }
-
-        .mySlides {
-            display: none;
-        }
-
-        .mySlides img {
-            width: 100%;
-            height: auto;
-        }
-
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            padding: 16px;
-            margin-top: -22px;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
-            user-select: none;
-        }
-
-        .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
-
-        .prev:hover, .next:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-    </style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
 </head>
-<body>
 
-<div class="slideshow-container">
-    <div class="mySlides">
-        <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg" alt="Slide 1">
-    </div>
-
-    <div class="mySlides">
-        <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg" alt="Slide 2">
-    </div>
-
-    <!-- Navigation arrows -->
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-</div>
-
-<script>
-    var slideIndex = 1;
-    showSlides(slideIndex);
-
-    // Next/previous controls
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
-    }
-
-    function showSlides(n) {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        if (n > slides.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = slides.length}
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slides[slideIndex-1].style.display = "block";
-    }
-</script>
-
+<body onload="launch()">
 </body>
+<script>
+var frames=['https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg','https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg'];
+var playing=true;
+var on_frame=0;
+var timer;
+
+function launch(){
+    document.body.innerHTML='<img id="film" src="frames/'+frames[on_frame]+'"/><br/><button id="actionbutton">Play</button><button onclick="stop()">Stop</button><br/>Milliseconds between frames:<input type="text" id="framerate" value="50"/><br/>Go to frame:<input type="text" id="gotoframe"><button onclick="goFrame(document.getElementById(\'gotoframe\').value);">Go</button>';   
+    document.getElementById('actionbutton').addEventListener('click',play); 
+    play();
+}
+
+function change(){
+    document.getElementById('film').src='frames/'+frames[on_frame]; //I have my images in a folder named frames
+    on_frame++;
+    if(on_frame==frames.length){on_frame=0;}
+    if(playing){
+        timer=setTimeout(change,document.getElementById('framerate').value?document.getElementById('framerate').value:50);
+    }
+}
+
+function play(){
+    document.getElementById('actionbutton').removeEventListener('click',play);
+    document.getElementById('actionbutton').addEventListener('click',pause);
+    document.getElementById('actionbutton').innerHTML='Pause';
+    clearInterval(timer);
+    playing=true;
+    change();
+}
+
+function pause(){
+    document.getElementById('actionbutton').removeEventListener('click',pause);
+    document.getElementById('actionbutton').addEventListener('click',play);
+    document.getElementById('actionbutton').innerHTML='Play'; 
+    playing=false; 
+
+}
+
+function stop(){
+    document.getElementById('actionbutton').removeEventListener('click',pause);
+    document.getElementById('actionbutton').addEventListener('click',play);
+    document.getElementById('actionbutton').innerHTML='Play'; 
+    playing=false; 
+    on_frame=0;
+}
+
+function goFrame(x){
+    if((x>-1)&&(x<=frames.length)){
+        on_frame=x;
+        if(!playing){document.getElementById('film').src='frames/'+frames[on_frame];}
+    }
+    else{
+        alert('Out of range');
+    }
+}
+</script>
 </html>
