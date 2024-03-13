@@ -152,12 +152,9 @@
 
            
 
+       
+ 
 
-
-
-
-
-      
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -167,143 +164,81 @@
     <style>
         .slideshow-container {
             position: relative;
-            width: 200px; /* Adjust container width as needed */
-            height: 150px; /* Adjust container height as needed */
+            max-width: 800px;
+            margin: auto;
             overflow: hidden;
         }
 
         .mySlides {
-            position: relative;
             display: none;
         }
 
         .mySlides img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
         }
 
-        .slide-text {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            padding: 2px 5px;
-            font-size: 12px;
-        }
-
-        .progress-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 3px;
-            background-color: #4caf50;
-            width: 0%;
-            transition: width 0.1s ease;
-        }
-
-        .control-icon {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            color: #fff;
+        .prev, .next {
             cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <div class="slideshow-container">
-        <div class="mySlides">
-            <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg">
-            <div class="slide-text">2312</div> <!-- Text for picture 1 -->
-        </div>
-        <div class="mySlides">
-            <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg">
-            <div class="slide-text">2401</div> <!-- Text for picture 2 -->
-        </div>
-        <div class="progress-bar"></div>
-        <div class="control-icon" onclick="toggleSlideshow()">
-            <i id="controlIcon" class="fa fa-pause"></i>
-        </div>
-        <div class="control-icon" onclick="stopSlideshow()">
-            <i class="fa fa-stop"></i>
-        </div>
+
+<div class="slideshow-container">
+    <div class="mySlides">
+        <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202312.jpg" alt="Slide 1">
     </div>
 
-    <script>
-        var slides = document.querySelectorAll('.mySlides');
-        var slideIndex = 0;
-        var progress = document.querySelector('.progress-bar');
-        var controlIcon = document.getElementById('controlIcon');
-        var isPaused = false;
-        var interval;
-        var progressInterval;
+    <div class="mySlides">
+        <img src="https://github.com/liumaize/liumaize.github.io/raw/main/SCR_occur_202401.jpg" alt="Slide 2">
+    </div>
 
-        function showSlides() {
-            slides[slideIndex].style.display = 'block';
-            slideIndex++;
-            if (slideIndex < slides.length) {
-                interval = setTimeout(hideSlides, 2000); // Display each slide for 2 seconds
-                updateProgressBar(2000); // Update progress bar for each slide (2 seconds)
-            } else {
-                // Reset slide index to restart slideshow
-                slideIndex = 0;
-                setTimeout(hideSlides, 2000); // Delay before restarting slideshow
-            }
+    <!-- Navigation arrows -->
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
         }
+        slides[slideIndex-1].style.display = "block";
+    }
+</script>
 
-        function hideSlides() {
-            slides[slideIndex - 1].style.display = 'none';
-            showSlides();
-        }
-
-        function updateProgressBar(duration) {
-            var width = 0;
-            var increment = 10;
-            var intervalDuration = duration / increment;
-            progress.style.width = '0%'; // Reset progress bar
-            progressInterval = setInterval(function() {
-                width += 100 / increment;
-                progress.style.width = width + '%';
-                if (width >= 100) {
-                    clearInterval(progressInterval);
-                }
-            }, intervalDuration);
-        }
-
-        function toggleSlideshow() {
-            if (isPaused) {
-                controlIcon.className = 'fa fa-pause';
-                isPaused = false;
-                showSlides();
-                updateProgressBar((slides.length - slideIndex) * 2000); // Resume progress bar
-            } else {
-                controlIcon.className = 'fa fa-play';
-                isPaused = true;
-                clearTimeout(interval);
-                clearInterval(progressInterval); // Stop the progress bar interval
-            }
-        }
-
-        function stopSlideshow() {
-            controlIcon.className = 'fa fa-play'; // Change control icon to play icon
-            isPaused = true; // Set slideshow status to paused
-            clearTimeout(interval); // Clear the interval
-            clearInterval(progressInterval); // Stop the progress bar interval
-            progress.style.width = '0%'; // Reset progress bar
-            // Reset slide index and hide all slides except the current one
-            slideIndex = 0;
-            slides.forEach(function(slide, index) {
-                if (index !== slideIndex) {
-                    slide.style.display = 'none';
-                }
-            });
-        }
-
-        showSlides();
-    </script>
 </body>
 </html>
